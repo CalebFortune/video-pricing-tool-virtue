@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Pricing Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="pricing-tool">
+        <label for="videoSlider">How many videos per month would you like?</label><br>
+        <input type="range" min="2" max="10" value="2" id="videoSlider">
+        <span id="sliderValue">2</span><br><br>
+
+        <label><input type="checkbox" id="SEOAndSocialAudit" checked> SEO and Social Audit</label><br>
+        <label><input type="checkbox" id="HostingAndDataManagement" checked> Hosting and Data Management</label><br>
+        <label><input type="checkbox" id="ProofingAndReEdits" checked> Proofing/Video Review and Re-Edits</label><br>
+        <label><input type="checkbox" id="StrategyAndReporting" checked> Strategy and Reporting</label><br>
+        <label><input type="checkbox" id="CopyAndScriptWriting" checked> Copy and Script Writing</label><br><br>
+
+        <strong>Estimated Monthly Cost:</strong> <span id="monthlyCostDisplay">$0</span><br>
+        <strong>Estimated Annual Cost:</strong> <span id="annualCostDisplay">$0</span><br><br>
+
+        <div id="userInfoSection" style="display: none;">
+            <label for="userName">Name:</label>
+            <input type="text" id="userName"><br><br>
+
+            <label for="userEmail">Email:</label>
+            <input type="email" id="userEmail"><br><br>
+
+            <label for="companyName">Company Name:</label>
+            <input type="text" id="companyName"><br><br>
+
+            <label for="userIntent">I would like to:</label>
+            <select id="userIntent">
+                <option value="learnMore">Learn More</option>
+                <option value="scheduleCall">Schedule a Call</option>
+                <option value="purchaseServices">Purchase Services</option>
+            </select><br><br>
+
+            <button id="submitInfo">Submit</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
