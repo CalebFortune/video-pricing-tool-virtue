@@ -11,7 +11,7 @@
 
 .pricing-tool label {
     display: block;
-    margin: 5px 0; /* Reduced spacing between checkboxes */
+    margin: 3px 0; /* Reduced spacing between checkboxes */
 }
 
 .pricing-tool input[type="checkbox"] {
@@ -30,7 +30,7 @@
 }
 
 .cost {
-    margin: 5px 0; /* Reduced spacing between cost lines */
+    margin: 4px 0; /* Reduced spacing between cost lines */
 }
 
 #submitInfo {
@@ -40,10 +40,23 @@
     border: none;
     border-radius: 50px;
     font-size: 16px;
+    font-weight: 700; /* Bold weight for the submit button */
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 15px; /* Added space between dropdown and submit button */
 }
 
 #submitInfo:hover {
     background-color: #e6890f;
+}
+
+.features-title {
+    margin-bottom: 5px; /* Reduced spacing between Features title and checkboxes */
+}
+
+#userInfoSection label,
+#userInfoSection input,
+#userInfoSection select {
+    border-radius: 50px; /* Added border radius to form elements */
+    margin-bottom: 10px; /* Added space between form elements */
 }
