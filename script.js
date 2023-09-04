@@ -61,3 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updatePrice();
 });
+
+        // Initialize Parse
+        Parse.initialize("leK5sqZJbjoK4kFbo5jM1HKv2hfW24A98OsBR00z", "ErjjnF7tF4SM9seMZsjfA0P5xlYtdhYHhSDeXw6G");
+        Parse.serverURL = 'https://parseapi.back4app.com/';
+
