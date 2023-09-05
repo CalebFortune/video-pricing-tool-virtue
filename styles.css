@@ -30,7 +30,7 @@
 }
 
 .cost {
-    margin: 4px 0; /* Reduced spacing between cost lines */
+    margin: 2px 0; /* Reduced spacing between cost lines */
 }
 
 #submitInfo {
@@ -70,3 +70,7 @@
     margin: 0 auto; /* This will center the container */
 }
 
+.priceLabel {
+    font-size: 14px;
+    font-weight: 700;
+}
