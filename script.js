@@ -13,11 +13,20 @@ const CopyCheckbox = document.getElementById('CopyAndScriptWriting');
 const userInfoSection = document.getElementById('userInfoSection');
 
 function updatePrice() {
-    // ... (rest of the pricing logic)
+    const firstVideoCost = 1640;
+    const subsequentVideoCost = 1340;
+    let videosPerMonth = parseInt(videoSlider.value);
+    let totalMonthlyCost = firstVideoCost + (subsequentVideoCost * (videosPerMonth - 1));
+    let totalYearlyCost = totalMonthlyCost * 12;
+
+    monthlyCostElement.textContent = `$${totalMonthlyCost.toFixed(2)}`;
+    annualCostElement.textContent = `$${totalYearlyCost.toFixed(2)}`;
 }
 
 videoSlider.addEventListener('input', function() {
-    // ... (rest of the slider logic)
+ document.getElementById('sliderValue').textContent = videoSlider.value;
+    updatePrice();
+    showUserInfoSection();
 });
 
 [SEOCheckbox, HostingCheckbox, ProofingCheckbox, StrategyCheckbox, CopyCheckbox].forEach(checkbox => {
