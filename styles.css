@@ -20,13 +20,13 @@
 
 .pricing-tool strong {
     display: block;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 5px; /* Reduced spacing after the strong tag */
 }
 
 .note {
     font-size: 12px;
-    margin-top: -15px;
+    margin-top: 5px;
 }
 
 .cost {
