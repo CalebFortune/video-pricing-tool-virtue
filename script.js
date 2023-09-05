@@ -7,18 +7,18 @@ const monthlyCostElement = document.getElementById('monthlyCostDisplay');
 const annualCostElement = document.getElementById('annualCostDisplay');
 const userInfoSection = document.getElementById('userInfoSection');
 
-const checkboxes = {
-    SEOAndSocialAudit: document.getElementById('SEOAndSocialAudit'),
-    HostingAndDataManagement: document.getElementById('HostingAndDataManagement'),
-    ProofingAndReEdits: document.getElementById('ProofingAndReEdits'),
-    StrategyAndReporting: document.getElementById('StrategyAndReporting'),
-    CopyAndScriptWriting: document.getElementById('CopyAndScriptWriting'),
-    ROIReporting: document.getElementById('ROIReporting'),
-    LicensedMusicStock: document.getElementById('LicensedMusicAndStockLibrary'),
-    EmailNewsletterCopy: document.getElementById('EmailNewsletterSocialCampaignCopyWriting'),
-    CustomAnimation: document.getElementById('Custom2D3DAnimation'),
-    VideoAdManagement: document.getElementById('VideoAdManagement')
-};
+const checkboxes = [
+    'SEOAndSocialAudit',
+    'HostingAndDataManagement',
+    'ProofingAndReEdits',
+    'StrategyAndReporting',
+    'CopyAndScriptWriting',
+    'ROIReporting',
+    'LicensedMusicAndStockLibrary',
+    'EmailNewsletterSocialAndCampaignCopyWriting',
+    'Custom2D3DAnimation',
+    'VideoAdManagement'
+];
 
 function updatePrice() {
     const baseVideoCostFirst = 1650;
@@ -47,7 +47,7 @@ function updatePrice() {
         totalYearlyCost -= yearlyHostingCost; // Assuming SEO and Hosting costs are the same. Adjust if different.
     }
 
-    monthlyCostElement.textContent = `$${totalMonthlyCost.toFixed(2)}`;
+     monthlyCostElement.textContent = `$${totalMonthlyCost.toFixed(2)}`;
     annualCostElement.textContent = `$${totalYearlyCost.toFixed(2)}`;
 }
 
@@ -57,7 +57,8 @@ videoSlider.addEventListener('input', function() {
     showUserInfoSection();
 });
 
-Object.values(checkboxes).forEach(checkbox => {
+checkboxes.forEach(checkboxId => {
+    const checkbox = document.getElementById(checkboxId);
     checkbox.addEventListener('change', updatePrice);
     checkbox.addEventListener('change', showUserInfoSection);
 });
