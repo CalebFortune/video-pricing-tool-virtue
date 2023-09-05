@@ -7,7 +7,7 @@ const monthlyCostElement = document.getElementById('monthlyCostDisplay');
 const annualCostElement = document.getElementById('annualCostDisplay');
 const userInfoSection = document.getElementById('userInfoSection');
 
-const checkboxes = [
+const checkboxIds = [
     'SEOAndSocialAudit',
     'HostingAndDataManagement',
     'ProofingAndReEdits',
@@ -19,6 +19,11 @@ const checkboxes = [
     'Custom2D3DAnimation',
     'VideoAdManagement'
 ];
+
+const checkboxes = checkboxIds.reduce((acc, id) => {
+    acc[id] = document.getElementById(id);
+    return acc;
+}, {});
 
 function updatePrice() {
     const baseVideoCostFirst = 1650;
@@ -47,7 +52,7 @@ function updatePrice() {
         totalYearlyCost -= yearlyHostingCost; // Assuming SEO and Hosting costs are the same. Adjust if different.
     }
 
-     monthlyCostElement.textContent = `$${totalMonthlyCost.toFixed(2)}`;
+    monthlyCostElement.textContent = `$${totalMonthlyCost.toFixed(2)}`;
     annualCostElement.textContent = `$${totalYearlyCost.toFixed(2)}`;
 }
 
@@ -57,10 +62,9 @@ videoSlider.addEventListener('input', function() {
     showUserInfoSection();
 });
 
-checkboxes.forEach(checkboxId => {
-    const checkbox = document.getElementById(checkboxId);
-    checkbox.addEventListener('change', updatePrice);
-    checkbox.addEventListener('change', showUserInfoSection);
+checkboxIds.forEach(checkboxId => {
+    checkboxes[checkboxId].addEventListener('change', updatePrice);
+    checkboxes[checkboxId].addEventListener('change', showUserInfoSection);
 });
 
 function showUserInfoSection() {
@@ -72,8 +76,8 @@ document.getElementById('submitInfo').addEventListener('click', async function()
     const userSelection = new UserSelections();
 
     userSelection.set("videosPerMonth", parseInt(videoSlider.value));
-    Object.keys(checkboxes).forEach(key => {
-        userSelection.set(key, checkboxes[key].checked);
+    checkboxIds.forEach(id => {
+        userSelection.set(id, checkboxes[id].checked);
     });
     userSelection.set("userName", document.getElementById('userName').value);
     userSelection.set("userEmail", document.getElementById('userEmail').value);
