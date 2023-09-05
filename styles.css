@@ -68,7 +68,7 @@
 .checkbox-container {
     text-align: left;
     width: 80%; /* Adjust this value based on your design preference */
-    margin: 0 auto; /* This will center the container */
+    margin-left: 30px;
 }
 
 .cost priceLabel {
