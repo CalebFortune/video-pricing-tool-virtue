@@ -67,8 +67,8 @@
 
 .checkbox-container {
     text-align: left;
-    width: 80%; /* Adjust this value based on your design preference */
-    margin-left: 60px;
+    width: 50%; /* Adjust this value based on your design preference */
+    margin: 0 auto;
 }
 
 .cost priceLabel {
