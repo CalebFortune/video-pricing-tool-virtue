@@ -33,38 +33,47 @@ function updatePrice() {
     const strategyCostSubsequentVideos = 100;
     const quarterlyMajorTravelCost = 1000;
     const yearlyHostingCost = 850;
+    const yearlySEOCost = 500;
     const quarterlyROICost = checkboxes['ROIReporting'].checked ? 300 : 0;
     const yearlyMusicStockCost = checkboxes['LicensedMusicAndStockLibrary'].checked ? 240 : 0;
     const quarterlyEmailNewsletterCost = checkboxes['EmailNewsletterCopy'].checked ? 1200 : 0;
     const quarterlyCustomAnimationCost = checkboxes['CustomAnimation'].checked ? 2500 : 0;
     const quarterlyVideoAdManagementCost = checkboxes['VideoAdManagement'].checked ? 5400 : 0;
+    const copyAndScriptWritingCostPerVideo = 200;
 
     let videosPerMonth = parseInt(videoSlider.value);
-    let yearlyVideoCost = videosPerMonth === 1 ? baseVideoCostFirst * 12 : (baseVideoCostFirst + (videosPerMonth - 1) * baseVideoCostSubsequent) * 12;
+    let totalMonthlyCost = videosPerMonth === 1 ? baseVideoCostFirst : baseVideoCostFirst + (videosPerMonth - 1) * baseVideoCostSubsequent;
     
     // Add proofing cost
-    let yearlyProofingCost = videosPerMonth * proofingCostPerVideo * 12;
+    if (checkboxes['ProofingAndReEdits'].checked) {
+        totalMonthlyCost += videosPerMonth * proofingCostPerVideo;
+    }
 
     // Add strategy cost
-    let yearlyStrategyCost = videosPerMonth === 1 ? strategyCostFirstVideo * 12 : (strategyCostFirstVideo + (videosPerMonth - 1) * strategyCostSubsequentVideos) * 12;
+    if (checkboxes['StrategyAndReporting'].checked) {
+        totalMonthlyCost += videosPerMonth === 1 ? strategyCostFirstVideo : strategyCostFirstVideo + (videosPerMonth - 1) * strategyCostSubsequentVideos;
+    }
+
+    // Add Copy and Scriptwriting cost
+    if (checkboxes['CopyAndScriptWriting'].checked) {
+        totalMonthlyCost += videosPerMonth * copyAndScriptWritingCostPerVideo;
+    }
 
     // Calculate yearly cost
-    let totalYearlyCost = yearlyVideoCost + yearlyProofingCost + yearlyStrategyCost + 4 * (quarterlyMajorTravelCost + quarterlyROICost + quarterlyEmailNewsletterCost + quarterlyCustomAnimationCost + quarterlyVideoAdManagementCost);
+    let totalYearlyCost = totalMonthlyCost * 12 + 4 * (quarterlyMajorTravelCost + quarterlyROICost + quarterlyEmailNewsletterCost + quarterlyCustomAnimationCost + quarterlyVideoAdManagementCost);
     
-    // Deduct costs based on unchecked options for yearly costs
+    // Deduct or add costs based on unchecked or checked options
     if (!checkboxes['HostingAndDataManagement'].checked) {
         totalYearlyCost -= yearlyHostingCost;
     }
     if (!checkboxes['SEOAndSocialAudit'].checked) {
-        totalYearlyCost -= yearlyHostingCost; // Assuming SEO and Hosting costs are the same. Adjust if different.
+        totalYearlyCost -= yearlySEOCost;
     }
-    if (!checkboxes['LicensedMusicAndStockLibrary'].checked) {
-        totalYearlyCost -= yearlyMusicStockCost;
+    if (checkboxes['LicensedMusicAndStockLibrary'].checked) {
+        totalYearlyCost += yearlyMusicStockCost;
     }
 
-    let totalMonthlyCost = totalYearlyCost / 12;
-
-    monthlyCostElement.textContent = `$${totalMonthlyCost.toFixed(2)}`;
+    monthlyCostElement.textContent = `$${(totalYearlyCost / 12).toFixed(2)}`; // Monthly cost derived from yearly cost
     annualCostElement.textContent = `$${totalYearlyCost.toFixed(2)}`;
 }
 
