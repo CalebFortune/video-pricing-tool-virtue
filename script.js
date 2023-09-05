@@ -40,30 +40,16 @@ function updatePrice() {
     const quarterlyVideoAdManagementCost = checkboxes['VideoAdManagement'].checked ? 5400 : 0;
 
     let videosPerMonth = parseInt(videoSlider.value);
-    let totalMonthlyCost = videosPerMonth === 1 ? baseVideoCostFirst : baseVideoCostFirst + (videosPerMonth - 1) * baseVideoCostSubsequent;
+    let yearlyVideoCost = videosPerMonth === 1 ? baseVideoCostFirst * 12 : (baseVideoCostFirst + (videosPerMonth - 1) * baseVideoCostSubsequent) * 12;
     
     // Add proofing cost
-    totalMonthlyCost += videosPerMonth * proofingCostPerVideo;
+    let yearlyProofingCost = videosPerMonth * proofingCostPerVideo * 12;
 
     // Add strategy cost
-    totalMonthlyCost += videosPerMonth === 1 ? strategyCostFirstVideo : strategyCostFirstVideo + (videosPerMonth - 1) * strategyCostSubsequentVideos;
-
-    // Add/Deduct costs based on checkboxes for monthly costs
-    if (checkboxes['ROIReporting'].checked) {
-        totalMonthlyCost += quarterlyROICost / 3; // Since it's a quarterly cost
-    }
-    if (checkboxes['EmailNewsletterCopy'].checked) {
-        totalMonthlyCost += quarterlyEmailNewsletterCost / 3; // Since it's a quarterly cost
-    }
-    if (checkboxes['CustomAnimation'].checked) {
-        totalMonthlyCost += quarterlyCustomAnimationCost / 3; // Since it's a quarterly cost
-    }
-    if (checkboxes['VideoAdManagement'].checked) {
-        totalMonthlyCost += quarterlyVideoAdManagementCost / 3; // Since it's a quarterly cost
-    }
+    let yearlyStrategyCost = videosPerMonth === 1 ? strategyCostFirstVideo * 12 : (strategyCostFirstVideo + (videosPerMonth - 1) * strategyCostSubsequentVideos) * 12;
 
     // Calculate yearly cost
-    let totalYearlyCost = totalMonthlyCost * 12 + 4 * (quarterlyMajorTravelCost + quarterlyROICost + quarterlyEmailNewsletterCost + quarterlyCustomAnimationCost + quarterlyVideoAdManagementCost);
+    let totalYearlyCost = yearlyVideoCost + yearlyProofingCost + yearlyStrategyCost + 4 * (quarterlyMajorTravelCost + quarterlyROICost + quarterlyEmailNewsletterCost + quarterlyCustomAnimationCost + quarterlyVideoAdManagementCost);
     
     // Deduct costs based on unchecked options for yearly costs
     if (!checkboxes['HostingAndDataManagement'].checked) {
@@ -75,6 +61,8 @@ function updatePrice() {
     if (!checkboxes['LicensedMusicAndStockLibrary'].checked) {
         totalYearlyCost -= yearlyMusicStockCost;
     }
+
+    let totalMonthlyCost = totalYearlyCost / 12;
 
     monthlyCostElement.textContent = `$${totalMonthlyCost.toFixed(2)}`;
     annualCostElement.textContent = `$${totalYearlyCost.toFixed(2)}`;
