@@ -25,25 +25,24 @@ function updatePrice() {
 
     let videosPerMonth = parseInt(videoSlider.value);
     let totalMonthlyCost = (videosPerMonth === 1) ? firstVideoCost : firstVideoCost + (subsequentVideoCost * (videosPerMonth - 1));
-    let totalYearlyCost = totalMonthlyCost * 12 + quarterlyCost * 4;
 
-    if (!SEOCheckbox.checked) {
-        totalYearlyCost -= yearlySEOCost;
+    if (SEOCheckbox.checked) {
+        totalMonthlyCost += yearlySEOCost / 12;
     }
-    if (!HostingCheckbox.checked) {
-        totalYearlyCost -= yearlyHostingCost;
+    if (HostingCheckbox.checked) {
+        totalMonthlyCost += yearlyHostingCost / 12;
     }
-    if (!ProofingCheckbox.checked) {
-        totalYearlyCost -= proofingCostPerVideo * videosPerMonth * 12;
+    if (ProofingCheckbox.checked) {
+        totalMonthlyCost += proofingCostPerVideo * videosPerMonth;
     }
-    if (!StrategyCheckbox.checked) {
-        totalYearlyCost -= strategyCostPerVideo * videosPerMonth * 12;
+    if (StrategyCheckbox.checked) {
+        totalMonthlyCost += strategyCostPerVideo * videosPerMonth;
     }
-    if (!CopyCheckbox.checked) {
-        totalYearlyCost -= copyCostPerVideo * videosPerMonth * 12;
+    if (CopyCheckbox.checked) {
+        totalMonthlyCost += copyCostPerVideo * videosPerMonth;
     }
 
-    totalMonthlyCost = totalYearlyCost / 12;
+    let totalYearlyCost = (totalMonthlyCost * 12) + (quarterlyCost * 4);
 
     totalMonthlyCost += totalMonthlyCost * markup;
     totalYearlyCost += totalYearlyCost * markup;
@@ -51,6 +50,7 @@ function updatePrice() {
     monthlyCostElement.textContent = `$${totalMonthlyCost.toFixed(2)}`;
     annualCostElement.textContent = `$${totalYearlyCost.toFixed(2)}`;
 }
+
 
 videoSlider.addEventListener('input', function() {
     document.getElementById('sliderValue').textContent = videoSlider.value;
