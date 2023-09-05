@@ -71,7 +71,7 @@
     margin: 0 auto; /* This will center the container */
 }
 
-.priceLabel {
+.cost priceLabel {
     font-size: 14px;
     font-weight: 700;
 }
