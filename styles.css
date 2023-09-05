@@ -21,7 +21,7 @@
 .pricing-tool strong {
     display: block;
     margin-top: 10px;
-    margin-bottom: 3px;
+    margin-bottom: -3px;
 }
 
 .note {
