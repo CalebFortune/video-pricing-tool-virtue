@@ -15,8 +15,8 @@ const checkboxIds = [
     'CopyAndScriptWriting',
     'ROIReporting',
     'LicensedMusicAndStockLibrary',
-    'EmailNewsletterSocialAndCampaignCopyWriting',
-    'Custom2D3DAnimation',
+    'EmailNewsletterCopy',
+    'CustomAnimation',
     'VideoAdManagement'
 ];
 
@@ -33,11 +33,11 @@ function updatePrice() {
     const strategyCostSubsequentVideos = 100;
     const quarterlyMajorTravelCost = 1000;
     const yearlyHostingCost = 850;
-    const quarterlyROICost = checkboxes.ROIReporting.checked ? 300 : 0;
-    const yearlyMusicStockCost = checkboxes.LicensedMusicAndStockLibrary.checked ? 240 : 0;
-    const quarterlyEmailNewsletterCost = checkboxes.EmailNewsletterSocialAndCampaignCopyWriting.checked ? 1200 : 0;
-    const quarterlyCustomAnimationCost = checkboxes.Custom2D3DAnimation.checked ? 2500 : 0;
-    const quarterlyVideoAdManagementCost = checkboxes.VideoAdManagement.checked ? 5400 : 0;
+    const quarterlyROICost = checkboxes['ROIReporting'].checked ? 300 : 0;
+    const yearlyMusicStockCost = checkboxes['LicensedMusicAndStockLibrary'].checked ? 240 : 0;
+    const quarterlyEmailNewsletterCost = checkboxes['EmailNewsletterCopy'].checked ? 1200 : 0;
+    const quarterlyCustomAnimationCost = checkboxes['CustomAnimation'].checked ? 2500 : 0;
+    const quarterlyVideoAdManagementCost = checkboxes['VideoAdManagement'].checked ? 5400 : 0;
 
     let videosPerMonth = parseInt(videoSlider.value);
     let totalMonthlyCost = videosPerMonth === 1 ? baseVideoCostFirst : baseVideoCostFirst + (videosPerMonth - 1) * baseVideoCostSubsequent;
