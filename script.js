@@ -13,7 +13,8 @@ const CopyCheckbox = document.getElementById('CopyAndScriptWriting');
 const userInfoSection = document.getElementById('userInfoSection');
 
 function updatePrice() {
-    const baseVideoCost = 1640;
+    const firstVideoCost = 1640;
+    const subsequentVideoCost = 1340;
     const quarterlyCost = 1000;
     const yearlyHostingCost = 1000;
     const yearlySEOCost = 500;
@@ -23,7 +24,14 @@ function updatePrice() {
     const markup = 0.30;
 
     let videosPerMonth = parseInt(videoSlider.value);
-    let totalMonthlyCost = videosPerMonth * baseVideoCost;
+    
+    // Calculate the cost based on the number of videos
+    if (videosPerMonth == 1) {
+        var totalMonthlyCost = firstVideoCost;
+    } else {
+        var totalMonthlyCost = firstVideoCost + (subsequentVideoCost * (videosPerMonth - 1));
+    }
+    
     let totalYearlyCost = totalMonthlyCost * 12 + quarterlyCost * 4;
 
     if (!SEOCheckbox.checked) {
