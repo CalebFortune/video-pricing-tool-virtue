@@ -60,3 +60,6 @@
     border-radius: 50px; /* Added border radius to form elements */
     padding: 10px; /* Added padding to form elements */
 }
+.dropOptions {
+    font-weight: 700;
+}
