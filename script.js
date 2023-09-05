@@ -34,17 +34,24 @@ function updatePrice() {
     const quarterlyMajorTravelCost = 1000;
     const yearlyHostingCost = 850;
     const quarterlyROICost = checkboxes.ROIReporting.checked ? 300 : 0;
-    const yearlyMusicStockCost = checkboxes.LicensedMusicStock.checked ? 240 : 0;
-    const quarterlyEmailNewsletterCost = checkboxes.EmailNewsletterCopy.checked ? 1200 : 0;
-    const quarterlyCustomAnimationCost = checkboxes.CustomAnimation.checked ? 2500 : 0;
+    const yearlyMusicStockCost = checkboxes.LicensedMusicAndStockLibrary.checked ? 240 : 0;
+    const quarterlyEmailNewsletterCost = checkboxes.EmailNewsletterSocialAndCampaignCopyWriting.checked ? 1200 : 0;
+    const quarterlyCustomAnimationCost = checkboxes.Custom2D3DAnimation.checked ? 2500 : 0;
     const quarterlyVideoAdManagementCost = checkboxes.VideoAdManagement.checked ? 5400 : 0;
 
     let videosPerMonth = parseInt(videoSlider.value);
     let totalMonthlyCost = videosPerMonth === 1 ? baseVideoCostFirst : baseVideoCostFirst + (videosPerMonth - 1) * baseVideoCostSubsequent;
+    
+    // Add proofing cost
     totalMonthlyCost += videosPerMonth * proofingCostPerVideo;
+
+    // Add strategy cost
     totalMonthlyCost += videosPerMonth === 1 ? strategyCostFirstVideo : strategyCostFirstVideo + (videosPerMonth - 1) * strategyCostSubsequentVideos;
 
+    // Calculate yearly cost
     let totalYearlyCost = totalMonthlyCost * 12 + 4 * (quarterlyMajorTravelCost + quarterlyROICost + quarterlyEmailNewsletterCost + quarterlyCustomAnimationCost + quarterlyVideoAdManagementCost);
+    
+    // Deduct costs based on unchecked options
     if (!checkboxes.HostingAndDataManagement.checked) {
         totalYearlyCost -= yearlyHostingCost;
     }
