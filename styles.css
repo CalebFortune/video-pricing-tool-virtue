@@ -21,12 +21,11 @@
 .pricing-tool strong {
     display: block;
     margin-top: 10px;
-    margin-bottom: 5px; /* Reduced spacing after the strong tag */
+    margin-bottom: 3px; /* Reduced spacing after the strong tag */
 }
 
 .note {
     font-size: 12px;
-    margin-top: 5px;
 }
 
 .cost {
@@ -58,6 +57,5 @@
 #userInfoSection input,
 #userInfoSection select {
     border-radius: 50px; /* Added border radius to form elements */
-    margin-bottom: 10px; /* Added space between form elements */
     padding: 10px; /* Added padding to form elements */
 }
