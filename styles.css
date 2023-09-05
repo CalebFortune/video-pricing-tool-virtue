@@ -63,3 +63,8 @@
 .dropOptions {
     font-weight: 700;
 }
+
+.checkbox-container {
+    text-align: left;
+    margin-left: 50px; /* Adjust this value to your liking for the desired indentation */
+}
