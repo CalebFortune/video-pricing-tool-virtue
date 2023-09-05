@@ -5,69 +5,47 @@ Parse.serverURL = 'https://parseapi.back4app.com/';
 const videoSlider = document.getElementById('videoSlider');
 const monthlyCostElement = document.getElementById('monthlyCostDisplay');
 const annualCostElement = document.getElementById('annualCostDisplay');
-const SEOCheckbox = document.getElementById('SEOAndSocialAudit');
-const HostingCheckbox = document.getElementById('HostingAndDataManagement');
-const ProofingCheckbox = document.getElementById('ProofingAndReEdits');
-const StrategyCheckbox = document.getElementById('StrategyAndReporting');
-const CopyCheckbox = document.getElementById('CopyAndScriptWriting');
-const ROIReportingCheckbox = document.getElementById('ROIReporting');
-const LicensedMusicCheckbox = document.getElementById('LicensedMusicAndStock');
-const EmailNewsletterCheckbox = document.getElementById('EmailNewsletterCopy');
-const CustomAnimationCheckbox = document.getElementById('CustomAnimation');
-const VideoAdManagementCheckbox = document.getElementById('VideoAdManagement');
 const userInfoSection = document.getElementById('userInfoSection');
 
+const checkboxes = {
+    SEOAndSocialAudit: document.getElementById('SEOAndSocialAudit'),
+    HostingAndDataManagement: document.getElementById('HostingAndDataManagement'),
+    ProofingAndReEdits: document.getElementById('ProofingAndReEdits'),
+    StrategyAndReporting: document.getElementById('StrategyAndReporting'),
+    CopyAndScriptWriting: document.getElementById('CopyAndScriptWriting'),
+    ROIReporting: document.getElementById('ROIReporting'),
+    LicensedMusicStock: document.getElementById('LicensedMusicAndStockLibrary'),
+    EmailNewsletterCopy: document.getElementById('EmailNewsletterSocialCampaignCopyWriting'),
+    CustomAnimation: document.getElementById('Custom2D3DAnimation'),
+    VideoAdManagement: document.getElementById('VideoAdManagement')
+};
+
 function updatePrice() {
-    const firstVideoCost = 1650;
-    const subsequentVideoCost = 1150;
-    const quarterlyCost = 1000;
-    const yearlyHostingCost = 850;
-    const yearlySEOCost = 500;
+    const baseVideoCostFirst = 1650;
+    const baseVideoCostSubsequent = 1150;
     const proofingCostPerVideo = 100;
-    const firstStrategyCostPerVideo = 250;
-    const subsequentStrategyCostPerVideo = 100;
-    const copyCostPerVideo = 250;
-    const quarterlyROICost = 300;
-    const yearlyMusicCost = 240;
-    const quarterlyEmailNewsletterCost = 1200;
-    const quarterlyCustomAnimationCost = 2500;
-    const quarterlyVideoAdManagementCost = 5400;
-    const markup = 0.30;
+    const strategyCostFirstVideo = 250;
+    const strategyCostSubsequentVideos = 100;
+    const quarterlyMajorTravelCost = 1000;
+    const yearlyHostingCost = 850;
+    const quarterlyROICost = checkboxes.ROIReporting.checked ? 300 : 0;
+    const yearlyMusicStockCost = checkboxes.LicensedMusicStock.checked ? 240 : 0;
+    const quarterlyEmailNewsletterCost = checkboxes.EmailNewsletterCopy.checked ? 1200 : 0;
+    const quarterlyCustomAnimationCost = checkboxes.CustomAnimation.checked ? 2500 : 0;
+    const quarterlyVideoAdManagementCost = checkboxes.VideoAdManagement.checked ? 5400 : 0;
 
     let videosPerMonth = parseInt(videoSlider.value);
-    let totalMonthlyCost = (videosPerMonth === 1) ? firstVideoCost : firstVideoCost + (subsequentVideoCost * (videosPerMonth - 1));
-    let totalYearlyCost = totalMonthlyCost * 12 + quarterlyCost * 4;
+    let totalMonthlyCost = videosPerMonth === 1 ? baseVideoCostFirst : baseVideoCostFirst + (videosPerMonth - 1) * baseVideoCostSubsequent;
+    totalMonthlyCost += videosPerMonth * proofingCostPerVideo;
+    totalMonthlyCost += videosPerMonth === 1 ? strategyCostFirstVideo : strategyCostFirstVideo + (videosPerMonth - 1) * strategyCostSubsequentVideos;
 
-    if (!SEOCheckbox.checked) {
-        totalYearlyCost -= yearlySEOCost;
-    }
-    if (!HostingCheckbox.checked) {
+    let totalYearlyCost = totalMonthlyCost * 12 + 4 * (quarterlyMajorTravelCost + quarterlyROICost + quarterlyEmailNewsletterCost + quarterlyCustomAnimationCost + quarterlyVideoAdManagementCost);
+    if (!checkboxes.HostingAndDataManagement.checked) {
         totalYearlyCost -= yearlyHostingCost;
     }
-    totalYearlyCost += proofingCostPerVideo * videosPerMonth * 12;
-    totalYearlyCost += (videosPerMonth === 1) ? firstStrategyCostPerVideo : firstStrategyCostPerVideo + (subsequentStrategyCostPerVideo * (videosPerMonth - 1)) * 12;
-    totalYearlyCost += copyCostPerVideo * videosPerMonth * 12;
-
-    if (ROIReportingCheckbox.checked) {
-        totalYearlyCost += quarterlyROICost * 4;
+    if (!checkboxes.SEOAndSocialAudit.checked) {
+        totalYearlyCost -= yearlyHostingCost; // Assuming SEO and Hosting costs are the same. Adjust if different.
     }
-    if (LicensedMusicCheckbox.checked) {
-        totalYearlyCost += yearlyMusicCost;
-    }
-    if (EmailNewsletterCheckbox.checked) {
-        totalYearlyCost += quarterlyEmailNewsletterCost * 4;
-    }
-    if (CustomAnimationCheckbox.checked) {
-        totalYearlyCost += quarterlyCustomAnimationCost * 4;
-    }
-    if (VideoAdManagementCheckbox.checked) {
-        totalYearlyCost += quarterlyVideoAdManagementCost * 4;
-    }
-
-    totalMonthlyCost = totalYearlyCost / 12;
-
-    totalMonthlyCost += totalMonthlyCost * markup;
-    totalYearlyCost += totalYearlyCost * markup;
 
     monthlyCostElement.textContent = `$${totalMonthlyCost.toFixed(2)}`;
     annualCostElement.textContent = `$${totalYearlyCost.toFixed(2)}`;
@@ -79,7 +57,7 @@ videoSlider.addEventListener('input', function() {
     showUserInfoSection();
 });
 
-[SEOCheckbox, HostingCheckbox, ProofingCheckbox, StrategyCheckbox, CopyCheckbox, ROIReportingCheckbox, LicensedMusicCheckbox, EmailNewsletterCheckbox, CustomAnimationCheckbox, VideoAdManagementCheckbox].forEach(checkbox => {
+Object.values(checkboxes).forEach(checkbox => {
     checkbox.addEventListener('change', updatePrice);
     checkbox.addEventListener('change', showUserInfoSection);
 });
@@ -93,20 +71,15 @@ document.getElementById('submitInfo').addEventListener('click', async function()
     const userSelection = new UserSelections();
 
     userSelection.set("videosPerMonth", parseInt(videoSlider.value));
-    userSelection.set("SEOAndSocialAudit", SEOCheckbox.checked);
-    userSelection.set("HostingAndDataManagement", HostingCheckbox.checked);
-    userSelection.set("ProofingAndReEdits", ProofingCheckbox.checked);
-    userSelection.set("StrategyAndReporting", StrategyCheckbox.checked);
-    userSelection.set("CopyAndScriptWriting", CopyCheckbox.checked);
-    userSelection.set("ROIReporting", ROIReportingCheckbox.checked);
-    userSelection.set("LicensedMusicAndStock", LicensedMusicCheckbox.checked);
-    userSelection.set("EmailNewsletterCopy", EmailNewsletterCheckbox.checked);
-    userSelection.set("CustomAnimation", CustomAnimationCheckbox.checked);
-    userSelection.set("VideoAdManagement", VideoAdManagementCheckbox.checked);
+    Object.keys(checkboxes).forEach(key => {
+        userSelection.set(key, checkboxes[key].checked);
+    });
     userSelection.set("userName", document.getElementById('userName').value);
     userSelection.set("userEmail", document.getElementById('userEmail').value);
     userSelection.set("companyName", document.getElementById('companyName').value);
     userSelection.set("userIntent", document.getElementById('userIntent').value);
+    userSelection.set("CalculatedMonthlyCost", parseFloat(monthlyCostElement.textContent.replace('$', '')));
+    userSelection.set("CalculatedAnnualCost", parseFloat(annualCostElement.textContent.replace('$', '')));
 
     try {
         await userSelection.save();
