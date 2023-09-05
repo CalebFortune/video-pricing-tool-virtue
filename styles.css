@@ -66,5 +66,7 @@
 
 .checkbox-container {
     text-align: left;
-    margin-left: 50px; /* Adjust this value to your liking for the desired indentation */
+    width: 80%; /* Adjust this value based on your design preference */
+    margin: 0 auto; /* This will center the container */
 }
+
