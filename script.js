@@ -48,15 +48,32 @@ function updatePrice() {
     // Add strategy cost
     totalMonthlyCost += videosPerMonth === 1 ? strategyCostFirstVideo : strategyCostFirstVideo + (videosPerMonth - 1) * strategyCostSubsequentVideos;
 
+    // Add/Deduct costs based on checkboxes for monthly costs
+    if (checkboxes['ROIReporting'].checked) {
+        totalMonthlyCost += quarterlyROICost / 3; // Since it's a quarterly cost
+    }
+    if (checkboxes['EmailNewsletterCopy'].checked) {
+        totalMonthlyCost += quarterlyEmailNewsletterCost / 3; // Since it's a quarterly cost
+    }
+    if (checkboxes['CustomAnimation'].checked) {
+        totalMonthlyCost += quarterlyCustomAnimationCost / 3; // Since it's a quarterly cost
+    }
+    if (checkboxes['VideoAdManagement'].checked) {
+        totalMonthlyCost += quarterlyVideoAdManagementCost / 3; // Since it's a quarterly cost
+    }
+
     // Calculate yearly cost
     let totalYearlyCost = totalMonthlyCost * 12 + 4 * (quarterlyMajorTravelCost + quarterlyROICost + quarterlyEmailNewsletterCost + quarterlyCustomAnimationCost + quarterlyVideoAdManagementCost);
     
-    // Deduct costs based on unchecked options
-    if (!checkboxes.HostingAndDataManagement.checked) {
+    // Deduct costs based on unchecked options for yearly costs
+    if (!checkboxes['HostingAndDataManagement'].checked) {
         totalYearlyCost -= yearlyHostingCost;
     }
-    if (!checkboxes.SEOAndSocialAudit.checked) {
+    if (!checkboxes['SEOAndSocialAudit'].checked) {
         totalYearlyCost -= yearlyHostingCost; // Assuming SEO and Hosting costs are the same. Adjust if different.
+    }
+    if (!checkboxes['LicensedMusicAndStockLibrary'].checked) {
+        totalYearlyCost -= yearlyMusicStockCost;
     }
 
     monthlyCostElement.textContent = `$${totalMonthlyCost.toFixed(2)}`;
