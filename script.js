@@ -90,7 +90,9 @@ checkboxIds.forEach(checkboxId => {
 
 function showUserInfoSection() {
     userInfoSection.style.display = 'block';
-    userInfoSection.classList.add('active');
+    setTimeout(() => {
+        userInfoSection.classList.add('active');
+    }, 10); // A short delay to ensure the display property is applied before the class is added.
 }
 
 document.getElementById('submitInfo').addEventListener('click', async function() {
