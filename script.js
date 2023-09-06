@@ -73,8 +73,9 @@ function updatePrice() {
         totalYearlyCost += yearlyMusicStockCost;
     }
 
-    monthlyCostElement.textContent = `$${(totalYearlyCost / 12).toFixed(2)}`; // Monthly cost derived from yearly cost
-    annualCostElement.textContent = `$${totalYearlyCost.toFixed(2)}`;
+    monthlyCostElement.textContent = `$${(totalYearlyCost / 12).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    annualCostElement.textContent = `$${totalYearlyCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
 }
 
 videoSlider.addEventListener('input', function() {
