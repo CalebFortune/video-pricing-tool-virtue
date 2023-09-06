@@ -11,7 +11,7 @@
 
 .pricing-tool label {
     display: block;
-    margin: 3px 0; /* Reduced spacing between checkboxes */
+    margin: 3px 0;
 }
 
 .pricing-tool input[type="checkbox"] {
@@ -31,7 +31,7 @@
 }
 
 .cost {
-    margin: 2px 0; /* Reduced spacing between cost lines */
+    margin: 2px 0;
 }
 
 #submitInfo {
@@ -41,10 +41,10 @@
     border: none;
     border-radius: 50px;
     font-size: 16px;
-    font-weight: 700; /* Bold weight for the submit button */
+    font-weight: 700;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 15px; /* Added space between dropdown and submit button */
+    margin-top: 15px;
 }
 
 #submitInfo:hover {
@@ -52,7 +52,7 @@
 }
 
 .features-title {
-    margin-bottom: 3px; /* Reduced spacing between Features title and checkboxes */
+    margin-bottom: 3px;
 }
 
 #userInfoSection {
@@ -62,28 +62,31 @@
 }
 
 #userInfoSection.active {
-    max-height: 500px; /* This value might need adjustment based on the content size */
+    max-height: 500px;
 }
+
 #userInfoSection label,
 #userInfoSection input,
 #userInfoSection select {
-    border-radius: 50px; /* Added border radius to form elements */
-    padding: 10px; /* Added padding to form elements */
+    border-radius: 50px;
+    padding: 10px;
 }
-.dropOptions {
+
+.dropOption {
     font-weight: 700;
 }
 
 .checkbox-container {
     text-align: left;
-    width: 92%; /* Adjust this value based on your design preference */
+    width: 92%;
     margin: 0 auto;
 }
 
-.cost priceLabel {
+.cost price-label {
     font-size: 14px;
     font-weight: 700;
 }
+
 hr {
     border: none;
     border-top: 1px solid #ddd;
