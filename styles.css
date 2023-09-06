@@ -55,6 +55,15 @@
     margin-bottom: 3px; /* Reduced spacing between Features title and checkboxes */
 }
 
+#userInfoSection {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+#userInfoSection.active {
+    max-height: 500px; /* This value might need adjustment based on the content size */
+}
 #userInfoSection label,
 #userInfoSection input,
 #userInfoSection select {
@@ -74,4 +83,9 @@
 .cost priceLabel {
     font-size: 14px;
     font-weight: 700;
+}
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
 }
